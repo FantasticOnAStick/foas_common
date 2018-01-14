@@ -11,6 +11,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pedantic")
 include_directories(
   include)
 
-file(GLOB_RECURSE LIB_SRC src/node FOLLOW_SYMLINKS *.cpp)
+file(GLOB_RECURSE LIB_SRC src/common FOLLOW_SYMLINKS *.cpp)
 add_library(${PROJECT_NAME}
   ${LIB_SRC})
