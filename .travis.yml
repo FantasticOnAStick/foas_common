@@ -1,0 +1,16 @@
+dist: trusty
+
+language: cpp
+
+compiler:
+ - gcc
+
+before_install:
+ - git clone http://github.com/FantasticOnAStick/foas_common.git
+
+script:
+ - cd foas_common
+ - mkdir build
+ - cd build
+ - cmake ..
+ - make
