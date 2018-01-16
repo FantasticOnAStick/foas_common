@@ -7,7 +7,7 @@ namespace foas {
     typedef enum {
       Undefined = 0,
       Success = 1,
-      Failed = 2
+      Failure = 2
     } TaskStatus;
   }
 }

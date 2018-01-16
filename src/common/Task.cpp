@@ -3,21 +3,32 @@
 
 namespace foas {
   namespace common {
-    Task::Task() {
+    Task::Task(std::function<void()> function) : mFunction(function), mState(ExecutionState::NotStarted) {
     }
-
+    
     Task::~Task() {
     }
     
     void Task::Start() {
+      try {
+	std::lock_guard<std::mutex> lock(mRunningLock);
+	
+	mFunction();
+      } catch(...) {
+	mResult.Status = Failure;
+      }
+      
+      mResult.Status = Success;
     }
     
     TaskResult Task::Wait() {
-      TaskResult result;
+      std::lock_guard<std::mutex> lock(mRunningLock);
+
+      if(mState == ExecutionState::NotStarted) {
+	// Exception
+      }
       
-      result.Status = Success;
-      
-      return result;
+      return mResult;
     }
   }
 }
