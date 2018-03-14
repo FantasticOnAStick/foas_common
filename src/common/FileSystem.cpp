@@ -59,7 +59,7 @@ namespace foas {
     FileSystem::FileSystemEntryType FileSystem::GetPathType(std::string path) {
       struct stat st;
       int s = stat(path.c_str(), &st);
-
+      
       if(s != 0) {
 	return FileSystemEntryType::Nonexistant;
       } else {
@@ -81,6 +81,17 @@ namespace foas {
       }
 
       return FileSystemEntryType::Unknown;
+    }
+
+    bool FileSystem::PathExists(std::string path) {
+      if(path != "") {
+	struct stat st;
+	int s = stat(path.c_str(), &st);
+	
+	return s == 0;
+      }
+      
+      return false;
     }
   }
 }

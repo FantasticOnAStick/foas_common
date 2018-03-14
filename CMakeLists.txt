@@ -8,9 +8,15 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pedantic")
 
+add_subdirectory(3rdparty)
+
 include_directories(
-  include)
+  include
+  ${PROJECT_SOURCE_DIR}/3rdparty/json-c)
 
 file(GLOB_RECURSE LIB_SRC src/common FOLLOW_SYMLINKS *.cpp)
 add_library(${PROJECT_NAME}
   ${LIB_SRC})
+
+target_link_libraries(${PROJECT_NAME}
+  json-c)

@@ -43,6 +43,8 @@ namespace foas {
       static std::list<FileSystemEntry> GetDirectoryContents(std::string path);
 
       static FileSystemEntryType GetPathType(std::string path);
+      
+      static bool PathExists(std::string path);
     };
   }
 }
