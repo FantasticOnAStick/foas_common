@@ -11,6 +11,9 @@ namespace foas {
   namespace common {
     namespace parsers {
       class JsonParser : public Parser {
+      private:
+	std::shared_ptr<Property> ConvertJsonObject(json_object* jobj);
+	
       public:
 	JsonParser();
 	~JsonParser();

@@ -2,6 +2,7 @@
 #define __FOAS_COMMON_PARSERS_PARSER_H__
 
 
+#include <iostream>
 #include <memory>
 #include <string>
 #include <fstream>
