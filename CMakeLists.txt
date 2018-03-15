@@ -20,3 +20,9 @@ add_library(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME}
   json-c)
+
+add_custom_target(prepare-json-c-environment
+  COMMAND cd ${PROJECT_SOURCE_DIR} && git submodule update --init --recursive && cd 3rdparty/json-c && sh autogen.sh && cd -)
+
+add_dependencies(json-c
+  prepare-json-c-environment)
