@@ -10,11 +10,6 @@ before_install:
  - git clone http://github.com/FantasticOnAStick/foas_common.git
 
 script:
- - cd foas_common
- - git submodule update --init --recursive
- - cd 3rdparty/json-c
- - ./autogen.sh
- - cd -
  - mkdir build
  - cd build
  - cmake ..
