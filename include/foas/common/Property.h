@@ -5,6 +5,10 @@
 #include <string>
 #include <list>
 #include <map>
+#include <memory>
+
+#include <foas/common/PropertyContent.h>
+#include <foas/common/TypedPropertyContent.hpp>
 
 
 namespace foas {
@@ -19,12 +23,51 @@ namespace foas {
       
     private:
       Type mType;
+      std::list<std::shared_ptr<Property>> mList;
+      std::map<std::string, std::shared_ptr<Property>> mDictionary;
+      
+      std::shared_ptr<PropertyContent> mContent;
       
     public:
-      Property();
+      Property(std::string content = "");
+      Property(double content);
+      Property(float content);
+      Property(int content);
+      Property(bool content);
       ~Property();
-
+      
       Type GetType();
+      
+      void operator=(std::string content);
+      void operator=(double content);
+      void operator=(float content);
+      void operator=(int content);
+      void operator=(bool content);
+      
+      std::shared_ptr<Property>& operator[](int index);
+      std::shared_ptr<Property>& operator[](std::string key);
+      
+      void Add(std::shared_ptr<Property> property);
+      
+      template<typename TDataType>
+	void Set(TDataType content) {
+	mContent = std::make_shared<TypedPropertyContent<TDataType>>(content);
+      }
+      
+      template<typename TDataType>
+	TDataType Get(TDataType defaultValue = TDataType()) {
+	TDataType returnValue = defaultValue;
+	
+	if(mType == Atom) {
+	  std::shared_ptr<TypedPropertyContent<TDataType>> tpc = std::dynamic_pointer_cast<TypedPropertyContent<TDataType>>(mContent);
+	  
+	  if(tpc) {
+	    returnValue = tpc->Get();
+	  }
+	}
+	
+	return returnValue;
+      }
     };
   }
 }
