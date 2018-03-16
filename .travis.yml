@@ -6,8 +6,12 @@ compiler:
  - gcc
 
 before_install:
- - sudo apt-get -y install dh-autoreconf
- - git clone http://github.com/FantasticOnAStick/foas_common.git
+ - ./prepare.sh
+
+addons:
+  apt:
+    packages:
+     - dh-autoreconf
 
 script:
  - mkdir build
