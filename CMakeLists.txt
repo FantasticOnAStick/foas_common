@@ -43,6 +43,7 @@ macro(enableGTesting)
   
   file(GLOB_RECURSE TEST_SRC FOLLOW_SYMLINKS src/test/*.cpp)
   add_executable(${PROJECT_NAME}-runUnitTests ${TEST_SRC})
+  target_link_libraries(${PROJECT_NAME}-runUnitTests ${PROJECT_NAME})
   
   add_dependencies(${PROJECT_NAME}-runUnitTests
     gtest)

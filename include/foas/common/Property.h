@@ -49,14 +49,19 @@ namespace foas {
       
       void Add(std::shared_ptr<Property> property);
       
+      std::shared_ptr<Property>& Get(std::string key);
+      std::shared_ptr<Property>& Get(int index);
+
+      size_t Size();
+      
       template<typename TDataType>
 	void Set(TDataType content) {
 	mContent = std::make_shared<TypedPropertyContent<TDataType>>(content);
       }
       
       template<typename TDataType>
-	TDataType Get(TDataType defaultValue = TDataType()) {
-	TDataType returnValue = defaultValue;
+	TDataType Get() {
+	TDataType returnValue = TDataType();
 	
 	if(mType == Atom) {
 	  std::shared_ptr<TypedPropertyContent<TDataType>> tpc = std::dynamic_pointer_cast<TypedPropertyContent<TDataType>>(mContent);

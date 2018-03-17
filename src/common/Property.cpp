@@ -56,6 +56,20 @@ namespace foas {
     }
     
     std::shared_ptr<Property>& Property::operator[](int index) {
+      return this->Get(index);
+    }
+    
+    std::shared_ptr<Property>& Property::operator[](std::string key) {
+      return this->Get(key);
+    }
+    
+    std::shared_ptr<Property>& Property::Get(std::string key) {
+      mType = Dictionary;
+      
+      return mDictionary[key];
+    }
+    
+    std::shared_ptr<Property>& Property::Get(int index) {
       mType = List;
       
       if(mList.size() <= index) {
@@ -67,11 +81,15 @@ namespace foas {
       
       return *it;
     }
-    
-    std::shared_ptr<Property>& Property::operator[](std::string key) {
-      mType = Dictionary;
-      
-      return mDictionary[key];
+
+    size_t Property::Size() {
+      if(mType == List) {
+	return mList.size();
+      } else if(mType == Dictionary) {
+	return mDictionary.size();
+      }
+
+      throw std::exception();
     }
     
     void Property::Add(std::shared_ptr<Property> property) {
