@@ -15,7 +15,7 @@ namespace foas {
       }
       
       std::shared_ptr<Property> JsonParser::ConvertJsonObject(json_object* jobj) {
-	std::shared_ptr<Property> property = nullptr;
+	std::shared_ptr<Property> property = std::make_shared<Property>();
 	
 	if(jobj) {
 	  enum json_type type = json_object_get_type(jobj);
