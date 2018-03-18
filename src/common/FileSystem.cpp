@@ -93,5 +93,21 @@ namespace foas {
       
       return false;
     }
+
+    bool FileSystem::IsPathAbsolute(std::string path) {
+      if(path.length() > 0) {
+	return path[0] == '/';
+      }
+      
+      return false;
+    }
+    
+    std::string FileSystem::GetAbsolutePath(std::string base, std::string path) {
+      if(FileSystem::IsPathAbsolute(path)) {
+	return path;
+      }
+      
+      return base + "/" + path;
+    }
   }
 }

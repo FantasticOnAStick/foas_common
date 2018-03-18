@@ -45,6 +45,9 @@ namespace foas {
       static FileSystemEntryType GetPathType(std::string path);
       
       static bool PathExists(std::string path);
+
+      static bool IsPathAbsolute(std::string path);
+      static std::string GetAbsolutePath(std::string base, std::string path);
     };
   }
 }
