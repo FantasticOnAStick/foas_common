@@ -3,6 +3,9 @@
 
 
 #include <mutex>
+#include <chrono>
+#include <thread>
+#include <iostream>
 
 #include <foas/common/TaskResult.h>
 
@@ -18,6 +21,7 @@ namespace foas {
       };
       
       std::function<void()> mFunction;
+      std::thread mThread;
       ExecutionState mState;
       TaskResult mResult;
       std::mutex mRunningLock;
@@ -28,6 +32,8 @@ namespace foas {
       
       void Start();
       TaskResult Wait();
+
+      static void Sleep(int milliSeconds);
     };
   }
 }

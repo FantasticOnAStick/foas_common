@@ -6,7 +6,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pedantic")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pedantic -fPIC")
 
 add_subdirectory(3rdparty)
 
@@ -19,7 +19,8 @@ add_library(${PROJECT_NAME}
   ${LIB_SRC})
 
 target_link_libraries(${PROJECT_NAME}
-  json-c)
+  json-c
+  pthread)
 
 add_custom_target(prepare-json-c-environment
   COMMAND cd ${PROJECT_SOURCE_DIR} && git submodule update --init --recursive && cd 3rdparty/json-c && sh autogen.sh && cd -)
