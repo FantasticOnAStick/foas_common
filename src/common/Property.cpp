@@ -3,6 +3,9 @@
 
 namespace foas {
   namespace common {
+    Property::Property(Type type) : mType(type) {
+    }
+    
     Property::Property(std::string content) {
       *this = content;
     }

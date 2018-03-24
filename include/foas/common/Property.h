@@ -29,6 +29,7 @@ namespace foas {
       std::shared_ptr<PropertyContent> mContent;
       
     public:
+      Property(Type type);
       Property(std::string content = "");
       Property(double content);
       Property(float content);
@@ -51,7 +52,7 @@ namespace foas {
       
       std::shared_ptr<Property>& Get(std::string key);
       std::shared_ptr<Property>& Get(int index);
-
+      
       size_t Size();
       
       template<typename TDataType>
